@@ -1,3 +1,3 @@
 .yarn
 node_modules
-.yarnrc
+.yarnrc.yml
