@@ -1,8 +1,17 @@
 import { plainToInstance } from 'class-transformer';
 import fs from 'fs';
 export class Credentials {
+  /**
+   * Требуется изменить на true
+   */
   auth: boolean = false;
+  /**
+   * Логин
+   */
   login: string = 'login';
+  /**
+   * Пароль
+   */
   password: string = 'password';
 }
 export default function getConfig() {

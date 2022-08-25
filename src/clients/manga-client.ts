@@ -1,5 +1,4 @@
 import { HttpClient } from './http-client';
-import { promises as fs } from 'fs';
 import { Manga } from '../entities/manga';
 
 export class MangaClient {
@@ -7,7 +6,6 @@ export class MangaClient {
   constructor() {
     this.client = new HttpClient('https://manga-chan.me');
   }
-  async init() {}
   async login(login: string, password: string) {
     await this.client.postCookies('/', {
       login: 'submit',
