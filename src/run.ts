@@ -3,6 +3,7 @@ import { MangaClient } from './clients/manga-client';
 import { AdapterBase } from './base/adapter';
 
 async function start(adapter: AdapterBase) {
+  adapter.required();
   const client = new MangaClient();
   const config = getConfig();
   console.log('Авторизация....');
@@ -26,6 +27,10 @@ export async function call(adapter: AdapterBase) {
   try {
     await start(adapter);
   } catch (e) {
-    console.log(e);
+    if (e instanceof Error) {
+      console.log(e.message);
+    } else {
+      console.log(e);
+    }
   }
 }

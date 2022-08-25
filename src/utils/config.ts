@@ -23,11 +23,15 @@ export default function getConfig() {
     if (data.auth) {
       return data;
     } else {
-      throw new Error('Измените файл config.json');
+      throw new Error(
+        'Измените файл config.json, так же требуется изменить auth на true',
+      );
     }
   } else {
     const data = new Credentials();
     fs.writeFileSync('config.json', JSON.stringify(data));
-    throw new Error('Измените файл config.json');
+    throw new Error(
+      'Измените файл config.json, так же требуется изменить auth на true',
+    );
   }
 }
