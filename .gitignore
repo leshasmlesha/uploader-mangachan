@@ -1,3 +1,5 @@
 .yarn
 node_modules
 .yarnrc.yml
+dist
+config.json

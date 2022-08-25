@@ -1,0 +1,24 @@
+import { plainToInstance } from 'class-transformer';
+import fs from 'fs';
+export class Credentials {
+  auth: boolean = false;
+  login: string = 'login';
+  password: string = 'password';
+}
+export default function getConfig() {
+  if (fs.existsSync('config.json')) {
+    const data = plainToInstance(
+      Credentials,
+      JSON.parse(fs.readFileSync('config.json', { encoding: 'utf-8' })),
+    );
+    if (data.auth) {
+      return data;
+    } else {
+      throw new Error('Измените файл config.json');
+    }
+  } else {
+    const data = new Credentials();
+    fs.writeFileSync('config.json', JSON.stringify(data));
+    throw new Error('Измените файл config.json');
+  }
+}
