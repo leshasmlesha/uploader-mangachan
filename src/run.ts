@@ -2,6 +2,7 @@ import getConfig from './utils/config';
 import { MangaClient } from './clients/manga-client';
 import { AdapterBase } from './base/adapter';
 import cliProgess from 'cli-progress';
+import wait_input from './utils/wait_input';
 
 async function start(adapter: AdapterBase) {
   const config = getConfig();
@@ -43,6 +44,7 @@ export async function call(adapter: AdapterBase) {
       console.log(e);
     }
   } finally {
+    await wait_input('Нажмите Enter чтобы выйти');
     process.exit();
   }
 }
