@@ -16,11 +16,12 @@
     "prebuild": "rimraf dist",
     "build": "npm run prebuild && tsc",
     "start": "ts-node src/main.ts",
+    "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "author": "",
   "license": "ISC",
-  "packageManager": "yarn@3.2.2",
+  "packageManager": "yarn@3.2.3",
   "devDependencies": {
     "@types/jsdom": "^20.0.0",
     "@types/node": "^18.7.13",
