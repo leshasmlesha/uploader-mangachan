@@ -19,6 +19,10 @@ export interface AdapterBase {
    */
   readonly path: string;
   /**
+   * Выводит информацию о адаптере
+   */
+  required(): void;
+  /**
    * Возвращает список манги
    */
   listManga(): AdapterMangaBase[];
