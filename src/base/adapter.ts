@@ -21,7 +21,7 @@ export interface AdapterBase {
   /**
    * Выводит информацию о адаптере
    */
-  required(): void;
+  required(): Promise<void>;
   /**
    * Возвращает список манги
    */

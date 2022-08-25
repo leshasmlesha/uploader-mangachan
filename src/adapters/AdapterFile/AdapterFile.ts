@@ -18,6 +18,9 @@ export class AdapterFile implements AdapterBase {
     Имя адаптера: ${this.name}
     Описание: ${this.description}
     `);
+    if (!fs.existsSync(this.path)) {
+      fs.mkdirSync(this.path);
+    }
     await wait_input('Нажмите Enter чтобы продолжить');
   }
   listManga(): AdapterMangaFile[] {

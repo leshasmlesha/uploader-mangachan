@@ -4,9 +4,9 @@ import { AdapterBase } from './base/adapter';
 import cliProgess from 'cli-progress';
 
 async function start(adapter: AdapterBase) {
+  const config = getConfig();
   await adapter.required();
   const client = new MangaClient();
-  const config = getConfig();
   console.log('Авторизация....');
   await client.login(config.login, config.password);
   for (const mangaLocal of adapter.listManga()) {
@@ -36,12 +36,13 @@ async function start(adapter: AdapterBase) {
 export async function call(adapter: AdapterBase) {
   try {
     await start(adapter);
-    process.exit();
   } catch (e) {
     if (e instanceof Error) {
       console.log(e.message);
     } else {
       console.log(e);
     }
+  } finally {
+    process.exit();
   }
 }
