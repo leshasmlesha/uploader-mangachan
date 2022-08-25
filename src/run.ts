@@ -5,10 +5,14 @@ import { AdapterBase } from './entities/adapter';
 async function start(adapter: AdapterBase) {
   const client = new MangaClient();
   const config = getConfig();
+  console.log('Авторизация....');
   await client.login(config.login, config.password);
   for (const mangaLocal of adapter.listManga()) {
+    console.log(`Поиск манги ${mangaLocal.title}`);
     const manga_online = await client.search(mangaLocal.title);
-    for (const chapter of mangaLocal.listChapter()) {
+    const chapters = mangaLocal.listChapter();
+    console.log(`Загрузка глав в кол-ве ${chapters.length}`);
+    for (const chapter of chapters) {
       await manga_online.upload(
         chapter.volume,
         chapter.chapter,

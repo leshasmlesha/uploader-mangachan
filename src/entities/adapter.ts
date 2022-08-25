@@ -1,16 +1,19 @@
 export interface AdapterBase {
-  title: string;
-  name: string;
-  description: string;
+  readonly title: string;
+  readonly name: string;
+  readonly description: string;
+  readonly path: string;
   listManga(): AdapterMangaBase[];
 }
 export interface AdapterMangaBase {
-  title: string;
+  readonly title: string;
+  readonly adapter: AdapterBase;
   listChapter(): AdapterChapterBase[];
 }
 export interface AdapterChapterBase {
-  volume: string;
-  chapter: string;
-  title: string;
+  readonly manga: AdapterMangaBase;
+  readonly volume: number;
+  readonly chapter: number;
+  readonly title: string;
   getFile(): Buffer;
 }
