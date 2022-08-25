@@ -1,6 +1,6 @@
 import { HttpClient } from './http-client';
 import { promises as fs } from 'fs';
-import { Manga } from './manga';
+import { Manga } from '../entities/manga';
 
 export class MangaClient {
   client: HttpClient;

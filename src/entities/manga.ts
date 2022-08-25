@@ -1,4 +1,4 @@
-import { MangaClient } from './manga-client';
+import { MangaClient } from '../clients/manga-client';
 
 export class Manga {
   private readonly id: number;
