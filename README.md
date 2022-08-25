@@ -8,6 +8,9 @@
 - [ ] AdapterNigma - Адаптер для Nigma.
 - [ ] AdapterMWX - Адаптер для MangaWatcher
 - [ ] AdapterJorogumo - Адаптер для Jorogumo(программа от создателя Anilabx(CrazyXacker))
+
+## Скачать
+Можно скачать исполняемые файлы в [релизах](https://github.com/leshasmlesha/uploader-mangachan/releases/)
 ## Инструкция к сборке, запуске
 Требуется NodeJS LTS
 ## Установка
