@@ -1,6 +1,6 @@
 import getConfig from './utils/config';
 import { MangaClient } from './clients/manga-client';
-import { AdapterBase } from './entities/adapter';
+import { AdapterBase } from './base/adapter';
 
 async function start(adapter: AdapterBase) {
   const client = new MangaClient();

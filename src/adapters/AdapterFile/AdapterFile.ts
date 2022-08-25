@@ -1,4 +1,4 @@
-import { AdapterBase, AdapterMangaBase } from 'src/entities/adapter';
+import { AdapterBase, AdapterMangaBase } from 'src/base/adapter';
 import fs from 'fs';
 import { AdapterMangaFile } from './AdapterMangaFile';
 
