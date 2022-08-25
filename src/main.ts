@@ -6,7 +6,6 @@ async function start() {
   const config = getConfig();
   await client.login(config.login, config.password);
   const manga = await client.search('Chainsaw Man');
-  console.log(manga);
 }
 async function call() {
   try {

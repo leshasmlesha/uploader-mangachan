@@ -1,5 +1,6 @@
 import { HttpClient } from './http-client';
 import { promises as fs } from 'fs';
+import { Manga } from './manga';
 
 export class MangaClient {
   client: HttpClient;
@@ -25,7 +26,6 @@ export class MangaClient {
       `.content_row`,
     ) as HTMLDivElement;
     const link = row.querySelector('h2 > a') as HTMLLinkElement;
-    return link.href;
+    return new Manga(this, link.href);
   }
-  async upload(volume: number, chapter: number, file: Buffer) {}
 }

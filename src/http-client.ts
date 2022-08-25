@@ -17,6 +17,10 @@ export class HttpClient {
     const res = await this.client.post<string>(url, params);
     return new JSDOM(res.data);
   }
+  async form(url: string, params: FormData) {
+    const res = await this.client.post<string>(url, params);
+    return new JSDOM(res.data);
+  }
   async postCookies(url: string, params: Record<string, string>) {
     const res = await this.client.post<string>(url, params, {
       headers: { 'Content-Type': 'multipart/form-data' },
