@@ -1,23 +1,18 @@
 import { AdapterChapterBase } from 'src/base/adapter';
 import fs from 'fs';
-import { AdapterMangaFile } from './AdapterMangaFile';
+import { AdapterVolumeFile } from './AdapterVolumeFile';
 
 export class AdapterChapterFile implements AdapterChapterBase {
-  constructor(
-    readonly manga: AdapterMangaFile,
-    readonly volume: number,
-    readonly chapter: number,
-    readonly title?: string,
-  ) {}
+  readonly chapter: number;
+  readonly title?: string;
+  constructor(readonly volume: AdapterVolumeFile, readonly path: string) {
+    const data = path.match(/(\d+)(| - (.*))\.zip/);
+    this.chapter = Number(data[1]);
+    this.title = data[3];
+  }
   async getFile(): Promise<Buffer> {
-    if (this.title) {
-      return fs.readFileSync(
-        `${this.manga.adapter.path}/${this.manga.title}/${this.volume}/${this.chapter} - ${this.title}.zip`,
-      );
-    } else {
-      return fs.readFileSync(
-        `${this.manga.adapter.path}/${this.manga.title}/${this.volume}/${this.chapter}.zip`,
-      );
-    }
+    return fs.readFileSync(
+      `${this.volume.manga.adapter.path}/${this.volume.manga.path}/${this.volume.path}/${this.path}`,
+    );
   }
 }

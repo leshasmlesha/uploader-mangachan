@@ -17,31 +17,33 @@ async function start(adapter: AdapterBase) {
       adapter.search_id,
       config.demo,
     );
-    const chapters = mangaLocal.listChapter();
-    console.log(`Загрузка глав в кол-ве ${chapters.length}`);
+    const volumes = mangaLocal.listVolume();
+    console.log(`Загрузка томов в кол-ве ${volumes.length}`);
     const bar = new cliProgess.SingleBar({
       format: `Загрузка манги ${mangaLocal.title} | {bar} | {percentage}%| {value}/{total} Глав | Текущая глава: {volume}`,
     });
-    bar.start(chapters.length, 0);
-    for (const chapter of chapters) {
-      if (chapter.title) {
-        bar.increment({
-          volume: `Том ${chapter.volume} глава ${chapter.chapter} - ${chapter.title}`,
-        });
-      } else {
-        bar.increment({
-          volume: `Том ${chapter.volume} глава ${chapter.chapter}`,
-        });
-      }
-      if (!config.demo) {
-        await manga_online.upload(
-          chapter.volume,
-          chapter.chapter,
-          await chapter.getFile(),
-          chapter.title,
-        );
-      } else {
-        console.log({ ...chapter, file: await chapter.getFile() });
+    bar.start(volumes.length, 0);
+    for (const volume of volumes) {
+      for (const chapter of volume.listChapter()) {
+        if (chapter.title) {
+          bar.increment({
+            volume: `Том ${chapter.volume.volume} глава ${chapter.chapter} - ${chapter.title}`,
+          });
+        } else {
+          bar.increment({
+            volume: `Том ${chapter.volume.volume} глава ${chapter.chapter}`,
+          });
+        }
+        if (!config.demo) {
+          await manga_online.upload(
+            chapter.volume.volume,
+            chapter.chapter,
+            await chapter.getFile(),
+            chapter.title,
+          );
+        } else {
+          console.log({ ...chapter, file: await chapter.getFile() });
+        }
       }
     }
     bar.stop();

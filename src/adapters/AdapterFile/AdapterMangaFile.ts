@@ -1,22 +1,17 @@
 import { AdapterMangaBase } from 'src/base/adapter';
 import fs from 'fs';
-import { AdapterChapterFile } from './AdapterChapterFile';
 import { AdapterFile } from './AdapterFile';
+import { AdapterVolumeFile } from './AdapterVolumeFile';
 
 export class AdapterMangaFile implements AdapterMangaBase {
-  constructor(readonly adapter: AdapterFile, readonly title: string) {}
-  listChapter(): AdapterChapterFile[] {
-    const result: AdapterChapterFile[] = [];
-    const dirs = fs.readdirSync(`${this.adapter.path}/${this.title}`);
-    for (const dir of dirs) {
-      const files = fs.readdirSync(`${this.adapter.path}/${this.title}/${dir}`);
-      for (const file of files) {
-        const data = file.match(/(\d+)(| - (.*))\.zip/);
-        result.push(
-          new AdapterChapterFile(this, Number(dir), Number(data[1]), data[3]),
-        );
-      }
-    }
+  readonly title: string;
+  constructor(readonly adapter: AdapterFile, readonly path: string) {
+    this.title = path;
+  }
+  listVolume(): AdapterVolumeFile[] {
+    const result: AdapterVolumeFile[] = [];
+    for (const volume of fs.readdirSync(`${this.adapter.path}/${this.path}`))
+      result.push(new AdapterVolumeFile(this, volume));
     return result;
   }
 }

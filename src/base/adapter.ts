@@ -44,6 +44,28 @@ export interface AdapterMangaBase {
    * Адаптер хранилища из готорого был вызван
    */
   readonly adapter: AdapterBase;
+  /**
+   * Папка с мангой
+   */
+  readonly path: string;
+  listVolume(): AdapterVolumeBase[];
+}
+/**
+ * Адаптер тома
+ */
+export interface AdapterVolumeBase {
+  /**
+   * Том
+   */
+  readonly volume: number;
+  /**
+   * Адаптер манги из которого был вызван
+   */
+  readonly manga: AdapterMangaBase;
+  /**
+   * Папка с томом
+   */
+  readonly path: string;
   listChapter(): AdapterChapterBase[];
 }
 /**
@@ -51,17 +73,17 @@ export interface AdapterMangaBase {
  */
 export interface AdapterChapterBase {
   /**
-   * Адаптер манги из которого был вызван
+   * Адаптер тома из готорого был вызван
    */
-  readonly manga: AdapterMangaBase;
-  /**
-   * Том
-   */
-  readonly volume: number;
+  readonly volume: AdapterVolumeBase;
   /**
    * Глава
    */
   readonly chapter: number;
+  /**
+   * Папка с главой
+   */
+  readonly path: string;
   /**
    * Название главы
    */
