@@ -6,6 +6,7 @@ export interface Args {
   adapter: string;
   work: string;
   interactive: boolean;
+  verbose: boolean;
 }
 export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   const program = new Command();
@@ -29,6 +30,12 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   program.addOption(
     new Option('-i, --interactive', 'Интерактивный выбор опций').default(false),
   );
+  program.addOption(
+    new Option(
+      '-v, --verbose',
+      'Подробный вывод логов, отключает progressbar',
+    ).default(false),
+  );
   program.parse(rawArgs);
   return program.opts<Args>();
 }
@@ -51,14 +58,14 @@ export async function promptForMissingOptions(options: Args): Promise<Args> {
     type: 'confirm',
     name: 'search-id',
     message: 'Хотите ли вести поиск по ID',
-    default: 'files',
+    default: false,
   });
 
   const answers = await inquirer.prompt(questions);
   return {
     ...options,
-    adapter: options.adapter || answers.adapter,
-    work: options.work || answers.work,
-    'search-id': options['search-id'] || answers['search-id'],
+    adapter: answers.adapter,
+    work: answers.work,
+    'search-id': answers['search-id'],
   };
 }

@@ -2,10 +2,11 @@
 Загрузчик позволяет загружать мангу на манга-тян, имеет возможность расширения благадоря адаптерам.
 Какие адаптеры в наличии:
 - AdapterFile - обычный файловый адаптер.
+- AdapterNigma - Адаптер для Nigma.
 
 Адаптеры в планах:
 - [x] AdapterFile - обычный файловый адаптер.
-- [ ] AdapterNigma - Адаптер для Nigma.
+- [x] AdapterNigma - Адаптер для Nigma.
 - [ ] AdapterMWX - Адаптер для MangaWatcher
 - [ ] AdapterJorogumo - Адаптер для Jorogumo(программа от создателя Anilabx(CrazyXacker))
 
