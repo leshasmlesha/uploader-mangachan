@@ -13,6 +13,14 @@ export class Credentials {
    * Пароль
    */
   password = 'password';
+  /**
+   * URL манга чан
+   */
+  url = 'https://manga-chan.me';
+  /**
+   * Демо режим вместо отправки манги выводит обьект
+   */
+  demo = false;
 }
 export default function getConfig() {
   if (fs.existsSync('config.json')) {

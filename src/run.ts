@@ -7,12 +7,15 @@ import wait_input from './utils/wait_input';
 async function start(adapter: AdapterBase) {
   const config = getConfig();
   await adapter.required();
-  const client = new MangaClient();
+  const client = new MangaClient(config.url);
   console.log('Авторизация....');
   await client.login(config.login, config.password);
   for (const mangaLocal of adapter.listManga()) {
     console.log(`Поиск манги ${mangaLocal.title}`);
-    const manga_online = await client.search(mangaLocal.title);
+    const manga_online = await client.search(
+      mangaLocal.title,
+      adapter.search_id,
+    );
     const chapters = mangaLocal.listChapter();
     console.log(`Загрузка глав в кол-ве ${chapters.length}`);
     const bar = new cliProgess.SingleBar({
@@ -29,12 +32,16 @@ async function start(adapter: AdapterBase) {
           volume: `Том ${chapter.volume} глава ${chapter.chapter}`,
         });
       }
-      await manga_online.upload(
-        chapter.volume,
-        chapter.chapter,
-        chapter.getFile(),
-        chapter.title,
-      );
+      if (!config.demo) {
+        await manga_online.upload(
+          chapter.volume,
+          chapter.chapter,
+          chapter.getFile(),
+          chapter.title,
+        );
+      } else {
+        console.log({ ...chapter, file: chapter.getFile() });
+      }
     }
     bar.stop();
   }

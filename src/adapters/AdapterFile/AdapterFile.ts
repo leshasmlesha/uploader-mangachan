@@ -10,7 +10,7 @@ export class AdapterFile implements AdapterBase {
   Адаптер для файлов: Обычный
   Структура:
   Название манги/Том/Глава - Название главы.zip`;
-  constructor(readonly path: string) {}
+  constructor(readonly path: string, readonly search_id?: boolean) {}
   async required() {
     console.log(`
     Адаптер: ${this.title}
@@ -26,6 +26,7 @@ export class AdapterFile implements AdapterBase {
   listManga(): AdapterMangaFile[] {
     return fs
       .readdirSync(this.path)
+      .filter((path) => (this.search_id ? path.match(/^\d+$/) : true))
       .map((dir) => new AdapterMangaFile(this, dir));
   }
 }

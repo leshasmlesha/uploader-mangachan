@@ -18,6 +18,11 @@ export interface AdapterBase {
    * Путь к папке с данными
    */
   readonly path: string;
+
+  /**
+   * Включить поиск по ID
+   */
+  readonly search_id?: boolean;
   /**
    * Выводит информацию о адаптере
    */

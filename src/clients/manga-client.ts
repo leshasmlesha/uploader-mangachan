@@ -3,8 +3,8 @@ import { Manga } from '../entities/manga';
 
 export class MangaClient {
   client: HttpClient;
-  constructor() {
-    this.client = new HttpClient('https://manga-chan.me');
+  constructor(readonly url: string) {
+    this.client = new HttpClient(url);
   }
   async login(login: string, password: string) {
     await this.client.postCookies('/', {
@@ -14,16 +14,20 @@ export class MangaClient {
       image: 'Вход',
     });
   }
-  async search(value: string) {
-    const data = await this.client.get('/', {
-      do: 'search',
-      subaction: 'search',
-      story: value,
-    });
-    const row = data.window.document.querySelector(
-      `.content_row`,
-    ) as HTMLDivElement;
-    const link = row.querySelector('h2 > a') as HTMLLinkElement;
-    return new Manga(this, link.href);
+  async search(value: string, id?: boolean) {
+    if (id) {
+      return new Manga(this, `${this.url}/manga/${value}-2.html`);
+    } else {
+      const data = await this.client.get('/', {
+        do: 'search',
+        subaction: 'search',
+        story: value,
+      });
+      const row = data.window.document.querySelector(
+        `.content_row`,
+      ) as HTMLDivElement;
+      const link = row.querySelector('h2 > a') as HTMLLinkElement;
+      return new Manga(this, link.href);
+    }
   }
 }
