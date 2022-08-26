@@ -7,13 +7,13 @@ export class AdapterChapterNigma implements AdapterChapterBase {
   readonly chapter: number;
   readonly title?: string;
   constructor(readonly volume: AdapterVolumeNigma, readonly path: string) {
-    const data = path.match(/^(\d+)(| -(.*))$/);
+    const data = path.match(/^(\d+(|\.\d+))(| -(.*))$/);
     this.chapter = Number(data[1]);
 
-    if (data[3]?.match(/.\d+/)) {
+    if (data[4]?.match(/.\d+/)) {
       this.chapter = Number(`${data[1]}${data[3]}`);
     } else {
-      this.title = data[3]?.slice(1);
+      this.title = data[4]?.slice(1);
     }
   }
   async getFile(): Promise<Buffer> {
