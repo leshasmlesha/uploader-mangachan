@@ -9,7 +9,7 @@ export class AdapterChapterFile implements AdapterChapterBase {
     readonly chapter: number,
     readonly title?: string,
   ) {}
-  getFile(): Buffer {
+  async getFile(): Promise<Buffer> {
     if (this.title) {
       return fs.readFileSync(
         `${this.manga.adapter.path}/${this.manga.title}/${this.volume}/${this.chapter} - ${this.title}.zip`,

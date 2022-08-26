@@ -69,5 +69,5 @@ export interface AdapterChapterBase {
   /**
    * Получить файл главы
    */
-  getFile(): Buffer;
+  getFile(): Promise<Buffer>;
 }

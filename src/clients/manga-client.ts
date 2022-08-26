@@ -14,7 +14,8 @@ export class MangaClient {
       image: 'Вход',
     });
   }
-  async search(value: string, id?: boolean) {
+  async search(value: string, id?: boolean, demo?: boolean) {
+    if (demo) return null;
     if (id) {
       return new Manga(this, `${this.url}/manga/${value}-2.html`);
     } else {

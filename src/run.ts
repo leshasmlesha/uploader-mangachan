@@ -15,6 +15,7 @@ async function start(adapter: AdapterBase) {
     const manga_online = await client.search(
       mangaLocal.title,
       adapter.search_id,
+      config.demo,
     );
     const chapters = mangaLocal.listChapter();
     console.log(`Загрузка глав в кол-ве ${chapters.length}`);
@@ -36,11 +37,11 @@ async function start(adapter: AdapterBase) {
         await manga_online.upload(
           chapter.volume,
           chapter.chapter,
-          chapter.getFile(),
+          await chapter.getFile(),
           chapter.title,
         );
       } else {
-        console.log({ ...chapter, file: chapter.getFile() });
+        console.log({ ...chapter, file: await chapter.getFile() });
       }
     }
     bar.stop();
