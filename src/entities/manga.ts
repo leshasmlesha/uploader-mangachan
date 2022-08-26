@@ -35,6 +35,6 @@ export class Manga {
     data.append('xfield[ch]', String(chapter));
     data.append('xfield_manga', String(file));
     if (title) data.append('xfield[ch_name]', String(title));
-    this.client.client.form(`addchapter?id=${this.id}`, data);
+    await this.client.client.form(`addchapter?id=${this.id}`, data);
   }
 }
