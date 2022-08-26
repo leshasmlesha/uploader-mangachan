@@ -4,15 +4,15 @@ export class Credentials {
   /**
    * Требуется изменить на true
    */
-  auth: boolean = false;
+  auth = false;
   /**
    * Логин
    */
-  login: string = 'login';
+  login = 'login';
   /**
    * Пароль
    */
-  password: string = 'password';
+  password = 'password';
 }
 export default function getConfig() {
   if (fs.existsSync('config.json')) {
