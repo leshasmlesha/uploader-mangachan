@@ -1,3 +1,6 @@
+/**
+ * Статические параметры Хранилище
+ */
 export interface AdapterStaticBase {
   /**
    * Название адаптера
