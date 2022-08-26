@@ -11,9 +11,9 @@ export class AdapterMangaFile implements AdapterMangaBase {
     for (const dir of dirs) {
       const files = fs.readdirSync(`${this.adapter.path}/${this.title}/${dir}`);
       for (const file of files) {
-        const data = file.match(/(.*) - (.*)\.zip/);
+        const data = file.match(/(\d+)(| - (.*))\.zip/);
         result.push(
-          new AdapterChapterFile(this, Number(dir), Number(data[1]), data[2]),
+          new AdapterChapterFile(this, Number(dir), Number(data[1]), data[3]),
         );
       }
     }

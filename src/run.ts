@@ -20,9 +20,15 @@ async function start(adapter: AdapterBase) {
     });
     bar.start(chapters.length, 0);
     for (const chapter of chapters) {
-      bar.increment({
-        volume: `Том ${chapter.volume} глава ${chapter.chapter} - ${chapter.title}`,
-      });
+      if (chapter.title) {
+        bar.increment({
+          volume: `Том ${chapter.volume} глава ${chapter.chapter} - ${chapter.title}`,
+        });
+      } else {
+        bar.increment({
+          volume: `Том ${chapter.volume} глава ${chapter.chapter}`,
+        });
+      }
       await manga_online.upload(
         chapter.volume,
         chapter.chapter,

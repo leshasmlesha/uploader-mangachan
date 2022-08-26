@@ -7,11 +7,17 @@ export class AdapterChapterFile implements AdapterChapterBase {
     readonly manga: AdapterMangaFile,
     readonly volume: number,
     readonly chapter: number,
-    readonly title: string,
+    readonly title?: string,
   ) {}
   getFile(): Buffer {
-    return fs.readFileSync(
-      `${this.manga.adapter.path}/${this.manga.title}/${this.volume}/${this.chapter} - ${this.title}.zip`,
-    );
+    if (this.title) {
+      return fs.readFileSync(
+        `${this.manga.adapter.path}/${this.manga.title}/${this.volume}/${this.chapter} - ${this.title}.zip`,
+      );
+    } else {
+      return fs.readFileSync(
+        `${this.manga.adapter.path}/${this.manga.title}/${this.volume}/${this.chapter}.zip`,
+      );
+    }
   }
 }

@@ -60,7 +60,7 @@ export interface AdapterChapterBase {
   /**
    * Название главы
    */
-  readonly title: string;
+  readonly title?: string;
   /**
    * Получить файл главы
    */
