@@ -1,2 +1,1 @@
-export * from './AdapterFile';
-export * from './AdapterNigma';
+export * from './adapters';

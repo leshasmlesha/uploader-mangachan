@@ -1,11 +1,10 @@
-import { AdapterMangaBase } from 'src/base/adapter';
+import { AdapterBase, AdapterMangaBase } from 'src/base/adapter';
 import fs from 'fs';
-import { AdapterFile } from './AdapterFile';
 import { AdapterVolumeFile } from './AdapterVolumeFile';
 
 export class AdapterMangaFile implements AdapterMangaBase {
   readonly title: string;
-  constructor(readonly adapter: AdapterFile, readonly path: string) {
+  constructor(readonly adapter: AdapterBase, readonly path: string) {
     this.title = path;
   }
   listVolume(): AdapterVolumeFile[] {

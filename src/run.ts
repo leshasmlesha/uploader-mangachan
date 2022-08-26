@@ -35,6 +35,7 @@ async function start(adapter: AdapterBase) {
         current_name: 'Текуший том',
         current_value: `Том ${volume.volume}`,
       });
+      console.log(volume);
       const chapters = volume.listChapter();
       bar_chapter.start(chapters.length, 0);
       for (const chapter of chapters) {

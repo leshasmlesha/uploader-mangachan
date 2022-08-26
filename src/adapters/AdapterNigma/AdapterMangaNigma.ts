@@ -1,11 +1,10 @@
-import { AdapterMangaBase } from 'src/base/adapter';
+import { AdapterBase, AdapterMangaBase } from 'src/base/adapter';
 import fs from 'fs';
-import { AdapterNigma } from './AdapterNigma';
 import { AdapterVolumeNigma } from './AdapterVolumeNigma';
 
 export class AdapterMangaNigma implements AdapterMangaBase {
   readonly title: string;
-  constructor(readonly adapter: AdapterNigma, readonly path: string) {
+  constructor(readonly adapter: AdapterBase, readonly path: string) {
     this.title = path;
   }
   listVolume(): AdapterVolumeNigma[] {
