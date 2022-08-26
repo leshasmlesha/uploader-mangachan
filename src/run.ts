@@ -1,9 +1,11 @@
 import getConfig from './utils/config';
 import { MangaClient } from './clients/manga-client';
 import { AdapterBase } from './base/adapter';
-import cliProgess from 'cli-progress';
+import cliProgress, { MultiBar } from 'cli-progress';
 import wait_input from './utils/wait_input';
-
+function timeout(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 async function start(adapter: AdapterBase) {
   const config = getConfig();
   await adapter.required();
@@ -18,20 +20,37 @@ async function start(adapter: AdapterBase) {
       config.demo,
     );
     const volumes = mangaLocal.listVolume();
-    console.log(`Загрузка томов в кол-ве ${volumes.length}`);
-    const bar = new cliProgess.SingleBar({
-      format: `Загрузка манги ${mangaLocal.title} | {bar} | {percentage}%| {value}/{total} Глав | Текущая глава: {volume}`,
+    console.log(`Загрузка манги ${mangaLocal.title}`);
+    const multibar = new cliProgress.MultiBar({
+      clearOnComplete: false,
+      hideCursor: true,
+      format: `Загрузка {what} | {bar} | {percentage}%| {value}/{total} {whats} | {current_name}: {current_value}`,
     });
-    bar.start(volumes.length, 0);
+    const bar_volume = multibar.create(volumes.length, 0);
+    const bar_chapter = multibar.create(0, 0);
     for (const volume of volumes) {
-      for (const chapter of volume.listChapter()) {
+      bar_volume.increment({
+        what: 'тома',
+        whats: 'томов',
+        current_name: 'Текуший том',
+        current_value: `Том ${volume.volume}`,
+      });
+      const chapters = volume.listChapter();
+      bar_chapter.start(chapters.length, 0);
+      for (const chapter of chapters) {
         if (chapter.title) {
-          bar.increment({
-            volume: `Том ${chapter.volume.volume} глава ${chapter.chapter} - ${chapter.title}`,
+          bar_chapter.increment({
+            what: 'главы',
+            whats: 'глав',
+            current_name: 'Текушая глава',
+            current_value: `глава ${chapter.chapter} - ${chapter.title}`,
           });
         } else {
-          bar.increment({
-            volume: `Том ${chapter.volume.volume} глава ${chapter.chapter}`,
+          bar_chapter.increment({
+            what: 'главы',
+            whats: 'глав',
+            current_name: 'Текушая глава',
+            current_value: `глава ${chapter.chapter}`,
           });
         }
         if (!config.demo) {
@@ -42,13 +61,16 @@ async function start(adapter: AdapterBase) {
             chapter.title,
           );
         } else {
-          console.log({ ...chapter, file: await chapter.getFile() });
+          await timeout(1000);
+          //console.log({ ...chapter, file: await chapter.getFile() });
         }
       }
+      bar_chapter.stop();
     }
-    bar.stop();
+    bar_volume.stop();
+    multibar.stop();
   }
-  console.log('Загрузка завершена');
+  console.log('\nЗагрузка завершена');
 }
 export async function call(adapter: AdapterBase) {
   try {
