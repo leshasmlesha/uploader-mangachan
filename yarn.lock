@@ -3011,6 +3011,7 @@ __metadata:
     eslint: ^8.22.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
+    form-data: ^4.0.0
     inquirer: ^8.2.4
     jsdom: ^20.0.0
     jszip: ^3.10.1

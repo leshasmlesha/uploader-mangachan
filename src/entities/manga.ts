@@ -1,4 +1,6 @@
 import { MangaClient } from '../clients/manga-client';
+import FormData from 'form-data';
+import empty_form_data from '../utils/empty_form_data';
 /**
  * Экземляр манги на сайте
  */
@@ -31,10 +33,19 @@ export class Manga {
   async upload(volume: number, chapter: number, file: Buffer, title?: string) {
     const data = new FormData();
     data.append('title', String(this.id));
+    data.append('catlist[]', '6');
     data.append('xfield[vol]', String(volume));
     data.append('xfield[ch]', String(chapter));
-    data.append('xfield_manga', String(file));
-    if (title) data.append('xfield[ch_name]', String(title));
+    if (title) {
+      data.append('xfield[ch_name]', String(title));
+    } else {
+      data.append('xfield[ch_name]', '');
+    }
+    data.append('xfield[manga]', `c:\\fakepath\\${volume} - ${chapter}.zip`);
+    data.append('xfield_manga', file, {
+      filename: `${volume} - ${chapter}.zip`,
+    });
+    empty_form_data(data);
     const page = await this.client.client.form(
       `addchapter?id=${this.id}`,
       data,

@@ -28,6 +28,6 @@ export class AdapterChapterNigma implements AdapterChapterBase {
           `${this.volume.manga.adapter.path}/${this.volume.manga.path}/${this.volume.path}/${this.path}/${file}`,
         ),
       );
-    return zip.generateAsync({ type: 'nodebuffer' });
+    return await zip.generateAsync({ type: 'nodebuffer' });
   }
 }

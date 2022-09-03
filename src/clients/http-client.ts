@@ -1,5 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { JSDOM } from 'jsdom';
+import FormData from 'form-data';
+import { promises as fs } from 'fs';
 /**
  * Http клиент
  */
@@ -17,6 +19,7 @@ export class HttpClient {
     this.client = axios.create({
       withCredentials: true,
       baseURL: url,
+      maxBodyLength: 52428890,
       headers: {
         'User-Agent':
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.167 YaBrowser/22.7.3.822 Yowser/2.5 Safari/537.36',
@@ -40,7 +43,9 @@ export class HttpClient {
    * @returns Возвращает DOM html
    */
   async form(url: string, params: FormData) {
-    const res = await this.client.post<string>(url, params);
+    const res = await this.client.post<string>(url, params.getBuffer(), {
+      headers: params.getHeaders(),
+    });
     return new JSDOM(res.data);
   }
   /**
