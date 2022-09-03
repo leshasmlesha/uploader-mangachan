@@ -63,12 +63,17 @@ async function start(adapter: AdapterBase, config: Credentials, options: Args) {
         const file = await chapter.getFile();
         if (!config.demo) {
           if (options.verbose) console.log({ ...chapter, file });
-          await manga_online.upload(
-            chapter.volume.volume,
-            chapter.chapter,
-            await chapter.getFile(),
-            chapter.title,
-          );
+          let loading = true;
+          while (loading)
+            try {
+              await manga_online.upload(
+                chapter.volume.volume,
+                chapter.chapter,
+                await chapter.getFile(),
+                chapter.title,
+              );
+              loading = false;
+            } catch (e) {}
         } else {
           await timeout(1000);
           if (options.verbose) console.log({ ...chapter, file });

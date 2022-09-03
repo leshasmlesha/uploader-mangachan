@@ -49,6 +49,9 @@ export class Manga {
     const page = await this.client.client.form(
       `addchapter?id=${this.id}`,
       data,
+      true,
     );
+    if (!page.includes('Глава добавлена'))
+      throw new Error('Глава не загружена');
   }
 }

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { JSDOM } from 'jsdom';
 import FormData from 'form-data';
+type Data<T extends boolean> = T extends true ? string : JSDOM;
 /**
  * Http клиент
  */
@@ -39,13 +40,22 @@ export class HttpClient {
    * Делает post запрос формате формы
    * @param url страница
    * @param params форма
+   * @param raw вывод в виде текста
    * @returns Возвращает DOM html
    */
-  async form(url: string, params: FormData) {
+  async form<T extends boolean>(
+    url: string,
+    params: FormData,
+    raw?: T,
+  ): Promise<Data<T>> {
     const res = await this.client.post<string>(url, params.getBuffer(), {
       headers: params.getHeaders(),
     });
-    return new JSDOM(res.data);
+    if (raw === true) {
+      return res.data as Data<T>;
+    } else {
+      return new JSDOM(res.data) as Data<T>;
+    }
   }
   /**
    * Делает post запрос с сохранение куков
