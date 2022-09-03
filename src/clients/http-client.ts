@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { JSDOM } from 'jsdom';
 import FormData from 'form-data';
-import { promises as fs } from 'fs';
 /**
  * Http клиент
  */
