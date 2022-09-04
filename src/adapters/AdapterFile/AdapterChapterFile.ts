@@ -1,11 +1,13 @@
-import { AdapterChapterBase } from 'src/base/AdapterIntance';
+import { AdapterChapterBase, AdapterVolumeBase } from 'src/base/AdapterIntance';
 import fs from 'fs';
-import { AdapterVolumeFile } from './AdapterVolumeFile';
+import { AdapterStaticChapterBase } from 'src/base/AdapterStatic';
 
-export class AdapterChapterFile implements AdapterChapterBase {
+export const AdapterChapterFile: AdapterStaticChapterBase = class
+  implements AdapterChapterBase
+{
   readonly chapter: number;
   readonly title?: string;
-  constructor(readonly volume: AdapterVolumeFile, readonly path: string) {
+  constructor(readonly volume: AdapterVolumeBase, readonly path: string) {
     const data = path.match(/(\d+)(| - (.*))\.zip/);
     this.chapter = Number(data[1]);
     this.title = data[3];
@@ -15,4 +17,4 @@ export class AdapterChapterFile implements AdapterChapterBase {
       `${this.volume.manga.adapter.path}/${this.volume.manga.path}/${this.volume.path}/${this.path}`,
     );
   }
-}
+};

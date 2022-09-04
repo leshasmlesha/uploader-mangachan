@@ -1,14 +1,21 @@
-import { AdapterBase, AdapterMangaBase } from 'src/base/AdapterIntance';
+import {
+  AdapterBase,
+  AdapterMangaBase,
+  AdapterVolumeBase,
+} from 'src/base/AdapterIntance';
 import fs from 'fs';
 import { AdapterVolumeNigma } from './AdapterVolumeNigma';
+import { AdapterStaticMangaBase } from 'src/base/AdapterStatic';
 
-export class AdapterMangaNigma implements AdapterMangaBase {
+export const AdapterMangaNigma: AdapterStaticMangaBase = class
+  implements AdapterMangaBase
+{
   readonly title: string;
   constructor(readonly adapter: AdapterBase, readonly path: string) {
     this.title = path;
   }
-  listVolume(): AdapterVolumeNigma[] {
-    const result: AdapterVolumeNigma[] = [];
+  listVolume(): AdapterVolumeBase[] {
+    const result: AdapterVolumeBase[] = [];
     const dirs = fs.readdirSync(`${this.adapter.path}/${this.path}`);
     for (const volume of dirs.filter((path) => path.match(/^Volume (\d+)$/)))
       result.push(new AdapterVolumeNigma(this, volume));
@@ -17,4 +24,4 @@ export class AdapterMangaNigma implements AdapterMangaBase {
       else return [];
     return result;
   }
-}
+};

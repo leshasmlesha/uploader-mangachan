@@ -1,12 +1,14 @@
-import { AdapterChapterBase } from 'src/base/AdapterIntance';
+import { AdapterChapterBase, AdapterVolumeBase } from 'src/base/AdapterIntance';
 import fs from 'fs';
-import { AdapterVolumeNigma } from './AdapterVolumeNigma';
 import JSZip from 'jszip';
+import { AdapterStaticChapterBase } from 'src/base/AdapterStatic';
 
-export class AdapterChapterNigma implements AdapterChapterBase {
+export const AdapterChapterNigma: AdapterStaticChapterBase = class
+  implements AdapterChapterBase
+{
   readonly chapter: number;
   readonly title?: string;
-  constructor(readonly volume: AdapterVolumeNigma, readonly path: string) {
+  constructor(readonly volume: AdapterVolumeBase, readonly path: string) {
     const data = path.match(/^(\d+(|\.\d+))(| -(.*))$/);
     this.chapter = Number(data[1]);
 
@@ -30,4 +32,4 @@ export class AdapterChapterNigma implements AdapterChapterBase {
       );
     return await zip.generateAsync({ type: 'nodebuffer' });
   }
-}
+};

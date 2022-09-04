@@ -1,4 +1,4 @@
-import { AdapterBase } from 'src/base/AdapterIntance';
+import { AdapterBase, AdapterMangaBase } from 'src/base/AdapterIntance';
 import fs from 'fs';
 import { AdapterMangaNigma } from './AdapterMangaNigma';
 import wait_input from '../../utils/wait_input';
@@ -25,7 +25,7 @@ export const AdapterNigma: AdapterStaticBase = class implements AdapterBase {
     }
     await wait_input('Нажмите Enter чтобы продолжить');
   }
-  listManga(): AdapterMangaNigma[] {
+  listManga(): AdapterMangaBase[] {
     return fs
       .readdirSync(this.path)
       .filter((path) => (this.search_id ? path.match(/^\d+$/) : true))
