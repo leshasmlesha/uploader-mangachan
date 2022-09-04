@@ -7,9 +7,10 @@ export const AdapterNigma: AdapterStaticBase = class implements AdapterBase {
   static readonly title = 'Адаптер для NigmaX';
   static readonly adapter = 'AdapterNigma';
   static readonly description = `
-  Адаптер для файлов: Nigma
-  Структура:
-  Название манги/Volume Том/Глава - Название главы/`;
+      Адаптер для файлов: Nigma
+      Структура:
+        Название манги/Volume Том/Глава - Название главы/
+        Название манги/Глава - Название главы/`;
   constructor(readonly path: string, readonly search_id?: boolean) {}
   async required() {
     console.log(`

@@ -5,8 +5,12 @@ import fs from 'fs';
 export class AdapterVolumeNigma implements AdapterVolumeBase {
   readonly volume: number;
   constructor(readonly manga: AdapterMangaNigma, readonly path: string) {
-    const data = path.match(/^Volume (\d+)$/);
-    this.volume = Number(data[1]);
+    if (path) {
+      const data = path.match(/^Volume (\d+)$/);
+      this.volume = Number(data[1]);
+    } else {
+      this.volume = 1;
+    }
   }
   listChapter(): AdapterChapterNigma[] {
     const result: AdapterChapterNigma[] = [];

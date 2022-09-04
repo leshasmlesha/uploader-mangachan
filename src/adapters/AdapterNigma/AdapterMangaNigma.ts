@@ -9,8 +9,12 @@ export class AdapterMangaNigma implements AdapterMangaBase {
   }
   listVolume(): AdapterVolumeNigma[] {
     const result: AdapterVolumeNigma[] = [];
-    for (const volume of fs.readdirSync(`${this.adapter.path}/${this.path}`))
+    const dirs = fs.readdirSync(`${this.adapter.path}/${this.path}`);
+    for (const volume of dirs.filter((path) => path.match(/^Volume (\d+)$/)))
       result.push(new AdapterVolumeNigma(this, volume));
+    if (result.length === 0)
+      if (dirs.length > 0) return [new AdapterVolumeNigma(this, '')];
+      else return [];
     return result;
   }
 }
