@@ -269,6 +269,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mime-types@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "@types/mime-types@npm:2.1.1"
+  checksum: 106b5d556add46446a579ad25ff15d6b421851790d887edcad558c90c1e64b1defc72bfbaf4b08f208916e21d9cc45cdb951d77be51268b18221544cfe054a3c
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:^18.7.14":
   version: 18.7.14
   resolution: "@types/node@npm:18.7.14"
@@ -1946,7 +1953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.35":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -3009,6 +3016,7 @@ __metadata:
     "@types/cli-progress": ^3.11.0
     "@types/inquirer": ^9.0.1
     "@types/jsdom": ^20.0.0
+    "@types/mime-types": ^2.1.1
     "@types/node": ^18.7.14
     "@typescript-eslint/eslint-plugin": 5.36.1
     "@typescript-eslint/parser": 5.36.1
@@ -3023,6 +3031,7 @@ __metadata:
     inquirer: ^8.2.4
     jsdom: ^20.0.0
     jszip: ^3.10.1
+    mime-types: ^2.1.35
     pkg: ^5.8.0
     prettier: ^2.7.1
     ts-node: ^10.9.1

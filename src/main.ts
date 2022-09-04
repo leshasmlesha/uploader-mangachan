@@ -11,10 +11,7 @@ export async function cli(args: string[]) {
     const AdapterStatic = adapters.find(
       (adapter) => adapter.adapter === options.adapter,
     );
-    const adapter = new AdapterStatic(
-      options.work,
-      options['search-id'],
-    );
+    const adapter = new AdapterStatic(options.work, options['search-id']);
     await call(adapter, config, options);
   } catch (e) {
     console.log(e.message);

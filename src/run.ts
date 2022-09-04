@@ -11,7 +11,7 @@ async function start(adapter: AdapterBase, config: Credentials, options: Args) {
   await adapter.required();
   const client = new MangaClient(config.url);
   console.log('Авторизация....');
-  await client.login(config.login, config.password);
+  if (!config.demo) await client.login(config.login, config.password);
   for (const mangaLocal of adapter.listManga()) {
     console.log(`Поиск манги ${mangaLocal.title}`);
     const manga_online = await client.search(
