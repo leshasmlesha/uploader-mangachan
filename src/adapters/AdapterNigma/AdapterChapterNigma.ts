@@ -1,4 +1,4 @@
-import { AdapterChapterBase } from 'src/base/adapter';
+import { AdapterChapterBase } from 'src/base/AdapterIntance';
 import fs from 'fs';
 import { AdapterVolumeNigma } from './AdapterVolumeNigma';
 import JSZip from 'jszip';

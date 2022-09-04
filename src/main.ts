@@ -1,5 +1,5 @@
 import { adapters } from './adapters';
-import { AdapterBase } from './base/adapter';
+import { AdapterBase } from './base/AdapterIntance';
 import { parseArgumentsIntoOptions, promptForMissingOptions } from './cli';
 import { call } from './run';
 import getConfig from './utils/config';

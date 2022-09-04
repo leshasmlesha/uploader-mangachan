@@ -1,4 +1,4 @@
-import { AdapterBase, AdapterMangaBase } from 'src/base/adapter';
+import { AdapterBase, AdapterMangaBase } from 'src/base/AdapterIntance';
 import fs from 'fs';
 import { AdapterVolumeFile } from './AdapterVolumeFile';
 

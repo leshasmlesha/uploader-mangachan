@@ -1,7 +1,8 @@
-import { AdapterBase, AdapterStaticBase } from 'src/base/adapter';
+import { AdapterBase } from 'src/base/AdapterIntance';
 import fs from 'fs';
 import { AdapterMangaFile } from './AdapterMangaFile';
 import wait_input from '../../utils/wait_input';
+import { AdapterStaticBase } from 'src/base/AdapterStatic';
 
 export const AdapterFile: AdapterStaticBase = class implements AdapterBase {
   static readonly title = 'Адаптер для файлов';

@@ -1,5 +1,5 @@
 import { MangaClient } from './clients/manga-client';
-import { AdapterBase } from './base/adapter';
+import { AdapterBase } from './base/AdapterIntance';
 import cliProgress from 'cli-progress';
 import wait_input from './utils/wait_input';
 import { Credentials } from './utils/config';

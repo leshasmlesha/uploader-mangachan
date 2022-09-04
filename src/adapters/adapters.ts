@@ -1,4 +1,4 @@
-import { AdapterStaticBase } from 'src/base/adapter';
+import { AdapterStaticBase } from 'src/base/AdapterStatic';
 import { AdapterFile } from './AdapterFile';
 import { AdapterNigma } from './AdapterNigma';
 export { AdapterFile };

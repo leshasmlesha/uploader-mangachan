@@ -1,26 +1,4 @@
 /**
- * Статические параметры Хранилище
- */
-export interface AdapterStaticBase {
-  /**
-   * Название адаптера
-   */
-  readonly title: string;
-  /**
-   * Описание адаптера
-   */
-  readonly description: string;
-  /**
-   * Имя адаптера
-   */
-  readonly adapter: string;
-  /**
-   * @param path Путь к рабочей папке
-   * @param search_id поиск по id
-   */
-  new (path: string, search_id?: boolean): AdapterBase;
-}
-/**
  * Адаптер хранилища
  */
 export interface AdapterBase {
