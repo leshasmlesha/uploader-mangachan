@@ -10,8 +10,8 @@ export class AdapterChapterNigma implements AdapterChapterBase {
     const data = path.match(/^(\d+(|\.\d+))(| -(.*))$/);
     this.chapter = Number(data[1]);
 
-    if (data[4]?.match(/.\d+/)) {
-      this.chapter = Number(`${data[1]}${data[3]}`);
+    if (data[4]?.match(/^\.\d+$/)) {
+      this.chapter = Number(`${data[1]}${data[4]}`);
     } else {
       this.title = data[4]?.slice(1);
     }
