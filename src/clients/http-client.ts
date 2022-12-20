@@ -33,7 +33,9 @@ export class HttpClient {
    * @returns Возвращает DOM html
    */
   async post(url: string, params: Record<string, string>) {
-    const res = await this.client.post<string>(url, params);
+    const res = await this.client.post<string>(url, params, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     return new JSDOM(res.data);
   }
   /**

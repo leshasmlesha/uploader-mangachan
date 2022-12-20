@@ -19,9 +19,9 @@ export class Manga {
    * @param url URL манги
    */
   constructor(private readonly client: MangaClient, url: string) {
-    const data = url.match(/(.*)\/manga\/(\d+)-(.*)\.html/);
-    this.id = Number(data[2]);
-    this.name = data[3];
+    const data = url.match(/(.*)\/(manga|)\/(\d+)-(.*)\.html/);
+    this.id = Number(data[3]);
+    this.name = data[4];
   }
   /**
    * Загрузка манги на сайт

@@ -26,16 +26,11 @@ export class MangaClient {
     if (id) {
       return new Manga(this, `${this.url}/manga/${value}-2.html`);
     } else {
-      const data = await this.client.get('/', {
-        do: 'search',
-        subaction: 'search',
-        story: value,
+      const data = await this.client.post('/engine/ajax/search.php', {
+        query: value,
       });
-      const row = data.window.document.querySelector(
-        `.content_row`,
-      ) as HTMLDivElement;
-      if (!row) throw new Error('Манга не найдена');
-      const link = row.querySelector('h2 > a') as HTMLLinkElement;
+      const link = data.window.document.querySelector('a');
+      if (!link) throw new Error('Манга не найдена');
       return new Manga(this, link.href);
     }
   }
