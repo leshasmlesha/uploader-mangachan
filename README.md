@@ -96,7 +96,7 @@ $ npm run pkg
 
 ## Разработка адаптеров
 
-Адаптер должен реализовывать интерфейсы описанные в файле [adapter.ts](./src/base/adapter.ts)
+Адаптер должен реализовывать интерфейсы описанные в файлах [AdapterStatic.ts](./src/base/AdapterStatic.ts),[AdapterInstance.ts](./src/base/AdapterInstance.ts)
 Пример можно посмотреть в папке [adapters](./src/adapters/)
 
 ## Планы
