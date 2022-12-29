@@ -30,6 +30,8 @@ export class MangaClient {
         query: value,
       });
       const link = data.window.document.querySelector('a');
+      if (data.window.document.querySelector('.notfound'))
+        throw new Error('Манга не найдена');
       if (!link) throw new Error('Манга не найдена');
       return new Manga(this, link.href);
     }
