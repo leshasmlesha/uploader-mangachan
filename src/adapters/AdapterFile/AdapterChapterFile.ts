@@ -8,9 +8,9 @@ export const AdapterChapterFile: AdapterStaticChapterBase = class
   readonly chapter: number;
   readonly title?: string;
   constructor(readonly volume: AdapterVolumeBase, readonly path: string) {
-    const data = path.match(/(\d+)(| - (.*))\.zip/);
+    const data = path.match(/^(\d+(|\.\d+))(| - (.*))\.zip$/);
     this.chapter = Number(data[1]);
-    this.title = data[3];
+    if (data[4]) this.title = data[4];
   }
   async getFile(): Promise<Buffer> {
     return fs.readFileSync(
