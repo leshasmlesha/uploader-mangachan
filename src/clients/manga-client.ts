@@ -21,7 +21,7 @@ export class MangaClient {
       throw new Error('Вы не прошли авторизацию');
     }
   }
-  async search(value: string, id?: boolean, demo?: boolean) {
+  async quick_search(value: string, id?: boolean, demo?: boolean) {
     if (demo) return null;
     if (id) {
       return new Manga(this, `${this.url}/manga/${value}-2.html`);
@@ -33,6 +33,24 @@ export class MangaClient {
       if (data.window.document.querySelector('.notfound'))
         throw new Error('Манга не найдена');
       if (!link) throw new Error('Манга не найдена');
+      return new Manga(this, link.href);
+    }
+  }
+  async full_search(value: string, id?: boolean, demo?: boolean) {
+    if (demo) return null;
+    if (id) {
+      return new Manga(this, `${this.url}/manga/${value}-2.html`);
+    } else {
+      const data = await this.client.get('/', {
+        do: 'search',
+        subaction: 'search',
+        story: value,
+      });
+      const row = data.window.document.querySelector(
+        `.content_row`,
+      ) as HTMLDivElement;
+      if (!row) throw new Error('Манга не найдена');
+      const link = row.querySelector('h2 > a') as HTMLLinkElement;
       return new Manga(this, link.href);
     }
   }

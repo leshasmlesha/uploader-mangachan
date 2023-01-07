@@ -14,7 +14,7 @@ async function start(adapter: AdapterBase, config: Credentials, options: Args) {
   if (!config.demo) await client.login(config.login, config.password);
   for (const mangaLocal of adapter.listManga()) {
     console.log(`Поиск манги ${mangaLocal.title}`);
-    const manga_online = await client.search(
+    const manga_online = await client.quick_search(
       mangaLocal.title,
       adapter.search_id,
       config.demo,
