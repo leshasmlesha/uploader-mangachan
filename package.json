@@ -21,7 +21,7 @@
   },
   "author": "",
   "license": "ISC",
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@types/cli-progress": "^3.11.0",
     "@types/inquirer": "^9.0.3",
