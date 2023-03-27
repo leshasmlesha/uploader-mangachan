@@ -46,7 +46,7 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   );
   program.addOption(
     new Option(
-      '-t, --timeout-error <number>',
+      '-e, --timeout-error <number>',
       'Добавить время ожидания после ошибок, секунды',
     ).default(0),
   );
