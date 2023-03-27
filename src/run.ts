@@ -105,12 +105,12 @@ export async function call(
     await start(adapter, config, options);
   } catch (e) {
     if (options.verbose) {
-      console.log(e);
+      console.error(e);
     } else {
       if (e instanceof Error) {
-        console.log(e.message);
+        console.error(e.message);
       } else {
-        console.log(e);
+        console.error(e);
       }
     }
   } finally {
