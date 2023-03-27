@@ -82,7 +82,7 @@ async function start(adapter: AdapterBase, config: Credentials, options: Args) {
                   chapter,
                   e,
                 );
-              if (options.exception) throw e;
+              if (!options['not-exception']) throw e;
             }
         } else {
           await timeout(1000);
