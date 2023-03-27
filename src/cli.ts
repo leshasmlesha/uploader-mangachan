@@ -7,6 +7,8 @@ export interface Args {
   work: string;
   interactive: boolean;
   verbose: boolean;
+  timeout: number;
+  'timeout-error': number;
 }
 export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   const program = new Command();
@@ -35,6 +37,18 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
       '-v, --verbose',
       'Подробный вывод логов, отключает progressbar',
     ).default(false),
+  );
+  program.addOption(
+    new Option(
+      '-t, --timeout <number>',
+      'Добавить время ожидания между загрузками главы, секунды',
+    ).default(0),
+  );
+  program.addOption(
+    new Option(
+      '-t, --timeout-error <number>',
+      'Добавить время ожидания после ошибок, секунды',
+    ).default(0),
   );
   program.parse(rawArgs);
   return program.opts<Args>();

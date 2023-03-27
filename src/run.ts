@@ -73,7 +73,16 @@ async function start(adapter: AdapterBase, config: Credentials, options: Args) {
                 chapter.title,
               );
               loading = false;
-            } catch (e) {}
+              await timeout(options['timeout'] * 1000);
+            } catch (e) {
+              await timeout(options['timeout-error'] * 1000);
+              if (options.verbose)
+                console.log(
+                  'Произошла ошибка во время загрузки(повтор): ',
+                  chapter,
+                  e,
+                );
+            }
         } else {
           await timeout(1000);
           if (options.verbose) console.log({ ...chapter, file });
