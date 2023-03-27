@@ -9,6 +9,7 @@ export interface Args {
   verbose: boolean;
   timeout: number;
   'timeout-error': number;
+  exception: boolean;
 }
 export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   const program = new Command();
@@ -49,6 +50,13 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
       '-e, --timeout-error <number>',
       'Добавить время ожидания после ошибок, секунды',
     ).default(0),
+  );
+
+  program.addOption(
+    new Option(
+      '-ex, --exception',
+      'После первой ошибки остановить выполнение',
+    ).default(false),
   );
   program.parse(rawArgs);
   return program.opts<Args>();
