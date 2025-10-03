@@ -3,16 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "bin": "dist/main.js",
-  "pkg": {
-    "scripts": "dist/**/*.js",
-    "targets": [
-      "node18-win-x64",
-      "node18-linux-x64"
-    ],
-    "outputPath": "bundle"
-  },
   "scripts": {
-    "pkg": "npm run build && pkg package.json",
     "prebuild": "rimraf dist",
     "build": "npm run prebuild && tsc",
     "start": "ts-node src/main.ts",
@@ -33,7 +24,6 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "pkg": "^5.8.1",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
