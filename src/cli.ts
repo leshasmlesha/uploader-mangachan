@@ -54,7 +54,7 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
 
   program.addOption(
     new Option(
-      '-nex, --not-exception',
+      '--not-exception',
       'После первой ошибки остановить выполнение(выкл)',
     ).default(false),
   );
