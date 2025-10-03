@@ -1740,26 +1740,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:^12.9.6":
-  version: 12.9.6
-  resolution: "inquirer@npm:12.9.6"
-  dependencies:
-    "@inquirer/ansi": "npm:^1.0.0"
-    "@inquirer/core": "npm:^10.2.2"
-    "@inquirer/prompts": "npm:^7.8.6"
-    "@inquirer/type": "npm:^3.0.8"
-    mute-stream: "npm:^2.0.0"
-    run-async: "npm:^4.0.5"
-    rxjs: "npm:^7.8.2"
-  peerDependencies:
-    "@types/node": ">=18"
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-  checksum: 10c0/068d9acbfab5e0c19d68603f86e296d00a8c797b6c2d7f2e659dfc557176e9247c2313beaf79d5557deb7d76a514cf9a75835c7928094b8759570b7a4e3f909f
-  languageName: node
-  linkType: hard
-
 "is-extglob@npm:^2.1.1":
   version: 2.1.1
   resolution: "is-extglob@npm:2.1.1"
@@ -2315,13 +2295,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"run-async@npm:^4.0.5":
-  version: 4.0.6
-  resolution: "run-async@npm:4.0.6"
-  checksum: 10c0/3e512c689d356238a06a59839deddeb09aec23bc66f780fe970fcf12b64bfc00c6880e9530ea22b8cf88a927145561f5a43343d8be87166e849ec0daaa3d4cf4
-  languageName: node
-  linkType: hard
-
 "run-parallel@npm:^1.1.9":
   version: 1.2.0
   resolution: "run-parallel@npm:1.2.0"
@@ -2331,7 +2304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.2.0, rxjs@npm:^7.8.2":
+"rxjs@npm:^7.2.0":
   version: 7.8.2
   resolution: "rxjs@npm:7.8.2"
   dependencies:
@@ -2659,6 +2632,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "uploader@workspace:."
   dependencies:
+    "@inquirer/prompts": "npm:^7.8.6"
     "@types/cli-progress": "npm:^3.11.6"
     "@types/inquirer": "npm:^9.0.9"
     "@types/jsdom": "npm:^27.0.0"
@@ -2674,7 +2648,6 @@ __metadata:
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.4"
     form-data: "npm:^4.0.4"
-    inquirer: "npm:^12.9.6"
     jsdom: "npm:^27.0.0"
     jszip: "npm:^3.10.1"
     mime-types: "npm:^3.0.1"

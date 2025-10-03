@@ -1,4 +1,4 @@
-import inquirer, { DistinctQuestion } from 'inquirer';
+import { input, select, confirm } from '@inquirer/prompts';
 import { adapters, defaultAdapter } from './adapters';
 import { Command, Option } from 'commander';
 export interface Args {
@@ -62,32 +62,22 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   return program.opts<Args>();
 }
 export async function promptForMissingOptions(options: Args): Promise<Args> {
-  const questions: DistinctQuestion<Args>[] = [];
-  questions.push({
-    type: 'list',
-    name: 'adapter',
-    message: 'Выберите адаптер',
-    choices: adapters.map((adapter) => adapter.adapter),
-    default: defaultAdapter,
-  });
-  questions.push({
-    type: 'input',
-    name: 'work',
-    message: 'Введите наименование рабочей папки',
-    default: 'files',
-  });
-  questions.push({
-    type: 'confirm',
-    name: 'search-id',
-    message: 'Хотите ли вести поиск по ID',
-    default: false,
-  });
-
-  const answers = await inquirer.prompt(questions);
+  const answers: Partial<Args> = {
+    adapter: await select({
+      message: 'Выберите адаптер',
+      choices: adapters.map((adapter) => adapter.adapter),
+    }),
+    work: await input({
+      message: 'Введите наименование рабочей папки',
+      default: 'files',
+    }),
+    'search-id': await confirm({
+      message: 'Хотите ли вести поиск по ID',
+      default: false,
+    }),
+  };
   return {
     ...options,
-    adapter: answers.adapter,
-    work: answers.work,
-    'search-id': answers['search-id'],
+    ...answers,
   };
 }
