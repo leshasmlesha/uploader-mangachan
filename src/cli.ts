@@ -1,4 +1,4 @@
-import inquirer, { QuestionCollection } from 'inquirer';
+import inquirer, { DistinctQuestion } from 'inquirer';
 import { adapters, defaultAdapter } from './adapters';
 import { Command, Option } from 'commander';
 export interface Args {
@@ -62,7 +62,7 @@ export function parseArgumentsIntoOptions(rawArgs: string[]): Args {
   return program.opts<Args>();
 }
 export async function promptForMissingOptions(options: Args): Promise<Args> {
-  const questions: QuestionCollection<Args>[] = [];
+  const questions: DistinctQuestion<Args>[] = [];
   questions.push({
     type: 'list',
     name: 'adapter',
