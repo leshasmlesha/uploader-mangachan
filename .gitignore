@@ -5,3 +5,4 @@ dist
 config.json
 files
 bundle
+.pnp.*
